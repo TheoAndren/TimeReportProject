@@ -1,23 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using TimeReport.API.Model;
+using System.Linq;
 
 namespace TimeReport.API.Services
 {
     public class TimeReportRepo : ITimeReport<TimeReport>
     {
-        public Task<TimeReport> Add(TimeReport newEntity)
+        private readonly AppDbContext _context;
+
+        public TimeReportRepo(AppDbContext Context)
         {
-            throw new System.NotImplementedException();
+            _context = Context;
         }
 
-        public Task<TimeReport> Delete(int id)
+        public async Task<TimeReport> Add(TimeReport newEntity)
         {
-            throw new System.NotImplementedException();
+            var result = await _context.TimeReports.AddAsync(newEntity);
+            await _context.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<int> EmployeeReportWeekly(int id, int year, int weekNumber)
+        public async Task<TimeReport> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var Delete = await _context.TimeReports.FirstOrDefaultAsync(t => t.TimeReportId == id);
+            if (Delete != null)
+            {
+                var result = _context.TimeReports.Remove(Delete);
+                await _context.SaveChangesAsync();
+                return result.Entity;
+            }
+            return null;
+        }
+
+        public async Task<int> EmployeeReportWeekly(int id, int year, int week)
+        {
+            var timeReports = await _context.TimeReports.Where(x =>
+            x.EmployeeId == id && x.Date.Year == year).ToListAsync();
+            return timeReports.Where(w => w.Week == week).Sum(h => h.WorkedHours);
+
+
         }
 
         public Task<IEnumerable<TimeReport>> EmployeesProject(int id)
@@ -30,19 +54,30 @@ namespace TimeReport.API.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<TimeReport>> GetAll()
+        public async Task<IEnumerable<TimeReport>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return await _context.TimeReports.ToListAsync();
         }
 
-        public Task<TimeReport> GetSingle(int id)
+        public async Task<TimeReport> GetSingle(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.TimeReports.FirstOrDefaultAsync(x => x.TimeReportId == id);
         }
 
-        public Task<TimeReport> Update(TimeReport Entity)
+        public async Task<TimeReport> Update(TimeReport Entity)
         {
-            throw new System.NotImplementedException();
+            var Update = await _context.TimeReports.FirstOrDefaultAsync(x => x.TimeReportId == Entity.TimeReportId);
+            if (Update != null)
+            {
+                Update.EmployeeId = Entity.EmployeeId;
+                Update.ProjectId = Entity.ProjectId;
+                Update.Date = Entity.Date;
+                Update.WorkedHours = Entity.WorkedHours;
+
+                await _context.SaveChangesAsync();
+                return Update;
+            }
+            return null;
         }
     }
 }

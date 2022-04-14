@@ -1,28 +1,52 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using TimeReport.API.Model;
 
 namespace TimeReport.API.Services
 {
     public class ProjectRepo : ITimeReport<Project>
     {
-        public Task<Project> Add(Project newEntity)
+        private readonly AppDbContext _context;
+
+        public ProjectRepo(AppDbContext Context)
+        {
+            _context = Context;
+        }
+        public async Task<Project> Add(Project newEntity)
+        {
+            var result = await _context.Projects.AddAsync(newEntity);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<Project> Delete(int id)
+        {
+            var Delete = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectId == id);
+            if (Delete != null)
+            {
+                var result = _context.Projects.Remove(Delete);
+                await _context.SaveChangesAsync();
+                return result.Entity;
+            }
+            return null;
+        }
+
+        public Task<int> EmployeeReportWeekly(int id, int year, int week)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Project> Delete(int id)
+        public async Task<IEnumerable<Project>> EmployeesProject(int id)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<int> EmployeeReportWeekly(int id, int year, int weekNumber)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<IEnumerable<Project>> EmployeesProject(int id)
-        {
-            throw new System.NotImplementedException();
+            var result = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectId == id);
+            if (result != null)
+            {
+                return await _context.Projects.Include(i => i.TimeReports).ThenInclude(s => s.Employee)
+                    .Where(p => p.ProjectId == id).Distinct().ToListAsync();
+            }
+            return null;
         }
 
         public Task<Project> EmployeeWorkedTime(int id)
@@ -30,19 +54,27 @@ namespace TimeReport.API.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<Project>> GetAll()
+        public async Task<IEnumerable<Project>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return await _context.Projects.ToListAsync();
         }
 
-        public Task<Project> GetSingle(int id)
+        public async Task<Project> GetSingle(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.Projects.FirstOrDefaultAsync(p => p.ProjectId == id);
         }
 
-        public Task<Project> Update(Project Entity)
+        public async Task<Project> Update(Project Entity)
         {
-            throw new System.NotImplementedException();
+            var Update = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectId == Entity.ProjectId);
+            if (Update != null)
+            {
+                Update.ProjectName = Entity.ProjectName;
+
+                await _context.SaveChangesAsync();
+                return Update;
+            }
+            return null;
         }
     }
 }

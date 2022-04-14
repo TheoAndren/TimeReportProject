@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeReport.API.Model;
+using TimeReport.API.Services;
 
 namespace TimeReport.API
 {
@@ -31,6 +32,10 @@ namespace TimeReport.API
 
             // EF SQL 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
+
+            services.AddScoped<ITimeReport<Employee>, EmployeeRepo>();
+            services.AddScoped<ITimeReport<Project>, ProjectRepo>();
+            services.AddScoped<ITimeReport<TimeReport>, TimeReportRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

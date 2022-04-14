@@ -12,6 +12,6 @@ namespace TimeReport.API.Services
         Task<T> Update(T Entity);
         Task<T> EmployeeWorkedTime(int id);
         Task<IEnumerable<T>> EmployeesProject(int id);
-        Task<int> EmployeeReportWeekly(int id, int year, int weekNumber);
+        Task<int> EmployeeReportWeekly(int id, int year, int week);
     }
 }

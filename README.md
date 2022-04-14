@@ -1,4 +1,5 @@
 # TimeReportProject
+![Violet Blue Modern Coding Bootcamp Facebook Banner](https://user-images.githubusercontent.com/91311313/163331929-251f2e10-9442-4847-b077-101bc259311c.jpg)
 
 
 Get info about specific employee and their time reports

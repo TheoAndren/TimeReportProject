@@ -1,20 +1,20 @@
 # TimeReportProject
 
 
-Get detailed information about a specific employee and their time reports
+Get info about specific employee and their time reports
 
 https://localhost:44375/api/employee/time/3
 
 ----------------------------------------------------------------------------------
 
-Get the amount of hours a specific employee has worked a specific week
+Get hours worked of an employee a specific week
 
 2 = employee with id 2
 https://localhost:44375/api/timereport/2/year=2022/week=14
 
 ----------------------------------------------------------------------------------
 
-Get all employees working with a specific project + their timereports
+Get all employees working with a specific project
 https://localhost:44375/api/project/1/employee
 
 ----------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ https://localhost:44375/api/project/3
 { "projectId": 8, "projectName": "Södra rosgården nybygge" }
 ----------------------------------------------------------------------------------
 
-DELETE Delete  [DELETE]
+Delete Project [DELETE]
 https://localhost:44375/api/project/3
 ----------------------------------------------------------------------------------
 

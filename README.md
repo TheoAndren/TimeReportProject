@@ -64,3 +64,5 @@ https://localhost:44375/api/timereport/10
 
 DELETE Timereport [DELETE]
 https://localhost:44375/api/timereport/5
+
+

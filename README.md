@@ -41,28 +41,35 @@ https://localhost:44375/api/employee/3
 Add Project [POST]
 https://localhost:44375/api/project
 { "projectName": "Södra rosgården nybygge"}
+
 ----------------------------------------------------------------------------------
 
 UPDATE Project [PUT]
 https://localhost:44375/api/project/3
 { "projectId": 8, "projectName": "Södra rosgården nybygge" }
+
 ----------------------------------------------------------------------------------
 
 Delete Project [DELETE]
 https://localhost:44375/api/project/3
+
 ----------------------------------------------------------------------------------
 
 ADD Timereport [POST]
 https://localhost:44375/api/timereport
 { "timeReportId": 5, "employeeId": 1, "projectId": 1, "date": "2022-04-10", "workedHours": 4}
+
 ----------------------------------------------------------------------------------
 
 UPDATE Timereport [PUT]
 https://localhost:44375/api/timereport/10
 { "timeReportId": 5, "employeeId": 1, "projectId": 1, "date": "2022-04-10", "workedHours": 6}
+
 ----------------------------------------------------------------------------------
 
 DELETE Timereport [DELETE]
 https://localhost:44375/api/timereport/5
+
+----------------------------------------------------------------------------------
 
 

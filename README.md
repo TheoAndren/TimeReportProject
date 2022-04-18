@@ -93,12 +93,15 @@ Interface
 Tekniska metoder
 
 
-EmployeeWorkedTime 
+EmployeeWorkedTime // 
+
 Denna metoden är den klass specifika för EmployeeRepo klassen. Den tar en int och skickar tillbaka info från employees som matchar idet och skickar tillbaka alla länkade time reports som employee med det matchande idet har. Där använder jag include metoden för att få dem matchande time reports istället för att göra en query med joins. 
 
-EmployeeReportWeekly
+EmployeeReportWeekly //
+
 Denna metoden är den klass specifika metoden för TimeReportRepo klassen. Den tar tre olika ints som är id, year och week. Först kollar den om det finns en match på idet, Om den hittar match så kommer det att anropa metoden GetFirstDayOfWeek, det kommer att returnera den första dagen i veckan (måndag) för valt år och vecka. Den sparade variabeln kommer att användas för att få TimeReports för den valda veckan där employee id är samma som indata-id. Metoden EmployeeReportWeekly kommer då att returnera ett heltal av totalt antal timmar den anställde har arbetat den veckan. Jag valde att använda Query för att få alla TimeReports för den valda veckan och Employee id. Du kan använda metoden Include här om information om medarbetaren eller tidrapporter ska returneras, men jag tyckte de var enklare såhär att få rätt info eftersom jag bara vill returnera ett heltal har jag valt att köra med Queryn.
 
-EmployeesProject
+EmployeesProject // 
+
 Denna metoden är den klassspecifika metoden för ProjectRepo. Den tar ett id och kollar om det finns ett projekt med matchande id. Om det finns en match så skickar den tillbaka info om projektet med idn. Då använder den include ännu en gång och skickar tillbaka alla employees som har timereports registrerade med samma projekt som efterfrågas. Jag använder också ThenInclude istället för att göra en längre query med flera joins för att få info från de olika tabellerna. Denna metoden skulle jag vilja göra om och göra lite bättre och inte skicka med lista på alla timereports. Men jag hittade tyvärr ingen lösning på detta på tiden jag hade. 
 

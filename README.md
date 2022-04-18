@@ -16,7 +16,7 @@ https://localhost:44375/api/timereport/2/year=2022/week=14
 ----------------------------------------------------------------------------------
 
 Get all employees working with a specific project
-https://localhost:44375/api/project/1/employee
+https://localhost:44375/api/project/1/employees
 
 ----------------------------------------------------------------------------------
 

@@ -104,5 +104,5 @@ Denna metoden är den klass specifika metoden för TimeReportRepo klassen. Den t
 
 EmployeesProject 
 
-Denna metoden är den klassspecifika metoden för ProjectRepo. Den tar ett id och kollar om det finns ett projekt med matchande id. Om det finns en match så skickar den tillbaka info om projektet med idn. Då använder den include ännu en gång och skickar tillbaka alla employees som har timereports registrerade med samma projekt som efterfrågas. Jag använder också ThenInclude istället för att göra en längre query med flera joins för att få info från de olika tabellerna. Denna metoden skulle jag vilja göra om och göra lite bättre och inte skicka med lista på alla timereports. Men jag hittade tyvärr ingen lösning på detta på tiden jag hade. 
+Denna metoden är den klassspecifika metoden för ProjectRepo. Den tar ett id och kollar om det finns ett projekt med matchande id. Om det finns en match så skickar den tillbaka info om projektet med idn. Då använder den include ännu en gång och skickar tillbaka alla employees som har timereports registrerade med samma projekt som efterfrågas. Jag använder också ThenInclude istället för att göra en längre query med flera joins för att få info från de olika tabellerna. 
 

@@ -29,7 +29,7 @@ https://localhost:44375/api/employee
 
 UPDATE Employee  [PUT]
 https://localhost:44375/api/employee/3
-{ "employeeId": 1, "firstName": "Jesper", "lastName": "Bratt", "phoneNumber": "051251512",
+{ "firstName": "Jesper", "lastName": "Bratt", "phoneNumber": "051251512",
 "email": "jesper.bratt@gmail.com"}
 
 ----------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ https://localhost:44375/api/project/3
 
 ADD Timereport [POST]
 https://localhost:44375/api/timereport
-{ "timeReportId": 5, "employeeId": 1, "projectId": 1, "date": "2022-04-10", "workedHours": 4}
+{ "employeeId": 1, "projectId": 1, "date": "2022-04-10", "workedHours": 4}
 
 ----------------------------------------------------------------------------------
 
